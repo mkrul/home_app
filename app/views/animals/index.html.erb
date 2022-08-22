@@ -2,26 +2,38 @@
 
 <h1>Animals</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
+<%= will_paginate @animals, list_classes: %w(pagination justify-content-end) %>
+
+
+<table>
   <tbody>
-    <% @animals.each do |animal| %>
-      <tr>
-        <td><%= animal.name %></td>
-        <td><%= animal.species %></td>
-        <td><%= link_to 'Show', animal %></td>
-        <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
-        <td><%= link_to 'Destroy', animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <% if @animals.empty? %>
+      No animals were found.
+    <% else %>
+
+      <% @animals.each do |animal| %>
+        <tr>
+          <td><%= link_to animal.name, animal, class: "text-decoration-none headline" %></td>
+        </tr>
+        <tr>
+          <td><%= animal.description %></td>
+        </tr>
+        <tr class="d-flex col-xs-3 justify-content-between pt-2">
+          <td><%= link_to 'Show', animal %></td>
+          <td><%= link_to 'Edit', edit_animal_path(animal) %></td>
+          <td><%= link_to 'Destroy', animal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <tr>
+          <td><hr></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
-<br>
+<%= will_paginate @animals, list_classes: %w(pagination justify-content-end) %>
+
+<br />
 
 <%= link_to 'New Animal', new_animal_path %>

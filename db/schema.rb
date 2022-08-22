@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_11_202501) do
-
-  create_table "animals", force: :cascade do |t|
-    t.string "name"
-    t.string "species"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
+ActiveRecord::Schema.define(version: 2022_08_21_130540) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -30,9 +23,35 @@ ActiveRecord::Schema.define(version: 2022_08_11_202501) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "tasks", force: :cascade do |t|
-    t.string "title"
+  create_table "subjects", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "formal_name"
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "category"
+  end
+
+  create_table "subjects_tasks", id: false, force: :cascade do |t|
+    t.integer "subject_id", null: false
+    t.integer "task_id", null: false
+    t.index ["subject_id", "task_id"], name: "index_subjects_tasks_on_subject_id_and_task_id"
+    t.index ["task_id", "subject_id"], name: "index_subjects_tasks_on_task_id_and_subject_id"
+  end
+
+  create_table "task_actions", force: :cascade do |t|
     t.datetime "completed_at"
+    t.integer "task_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_task_actions_on_task_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,6 +1,6 @@
-class CreateAnimals < ActiveRecord::Migration[6.0]
+class CreateSubjects < ActiveRecord::Migration[6.0]
   def change
-    create_table :animals do |t|
+    create_table :subjects do |t|
       t.string :name, default: nil
       t.string :species, default: nil
 

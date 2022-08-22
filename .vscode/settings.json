@@ -1,3 +1,5 @@
 {
-  "git.ignoreLimitWarning": true
+  "git.ignoreLimitWarning": true,
+  "emmet.includeLanguages": {"erb": "html"},
+  "liveServer.settings.CustomBrowser": "chrome"
 }
